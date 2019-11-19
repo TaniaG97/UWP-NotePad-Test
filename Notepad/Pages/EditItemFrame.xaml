@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="Notepad.Pages.EditItemFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notepad.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#3F4759">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Hider" Grid.Row="0" Background="{x:Bind ViewModel.EditingItem.Color}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="BackButton" 
+                    Width="50"
+                    Height="50"
+                    FontFamily="Segoe MDL2 Assets" 
+                    FontSize="40" 
+                    FontWeight="Bold"
+                    Content="&#xE00E;" 
+                    Foreground="White"  
+                    Background="{x:Null}"
+                    Click="BackButton_Click"/>
+            <TextBox x:Name="Title" 
+                     Grid.Column="1" 
+                     Text="{x:Bind ViewModel.EditingItem.Title}"
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Center"
+                     Margin="25,0,25,0"
+                     FontWeight="Bold"
+                     FontSize="30"
+                     Foreground="White"
+                     TextChanged="Title_TextChanged"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Padding="25">
+            <TextBox x:Name="Description" 
+                     Text="{x:Bind ViewModel.EditingItem.Description}"
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Center"
+                     TextWrapping="Wrap" AcceptsReturn="True"
+                     FontWeight="Bold"
+                     FontSize="30"
+                     Foreground="White"
+                     TextChanged="Description_TextChanged"/>
+        </StackPanel>
+        <RelativePanel Grid.Row="2" >
+            <StackPanel Orientation="Horizontal"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <RadioButton x:Name="Red"
+                             GroupName="Colors"
+                             Background="#FE9899"
+                             Style="{StaticResource CustomRadioButtonStyle}"
+                             MinWidth="50"
+                             Height="50"
+                             Margin="25,0,0,0"
+                             Checked="RadioButton_Checked"/>
+                <RadioButton x:Name="Yellow"
+                             GroupName="Colors"
+                             Background="#FFE2C5"
+                             Style="{StaticResource CustomRadioButtonStyle}"
+                             MinWidth="50"
+                             Height="50"
+                             Margin="25,0,0,0"
+                             Checked="RadioButton_Checked"/>
+                <RadioButton x:Name="Blue"
+                             GroupName="Colors"
+                             Background="#41CDCC"
+                             Style="{StaticResource CustomRadioButtonStyle}"
+                             MinWidth="50"
+                             Height="50"
+                             Margin="25,0,0,0"
+                             Checked="RadioButton_Checked"/>
+            </StackPanel>
+            <Button Grid.Row="2" x:Name="AddFileButton"
+                    Style="{StaticResource circleButtonStyle}"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    Width="70"
+                    Height="70"
+                    Margin="25,0,25,0"
+                    FontFamily="Segoe MDL2 Assets" 
+                    FontSize="40" 
+                    Content="&#xE840;" 
+                    Foreground="White"  
+                    Background="#011F33"
+                    Click="AddFileButton_Click"/>
+        </RelativePanel>
+        
+
+    </Grid>
+
+</Page>
