@@ -8,17 +8,20 @@ namespace Notepad.DataModels
 {
     public class ContentItemDataModel
     {
-        public string Color { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-
-        string[] colors = { "#FE9899", "#FFE2C5", "#41CDCC" };
+        public string Color { get; set; }
+        
+        public int CategoryId { get; set; }
+        public CategoryDataModel Category { get; set; }
 
         public ContentItemDataModel()
         {
+            string[] colors = { "#FE9899", "#FFE2C5", "#41CDCC" };
             Color = colors[new Random().Next(colors.Length)];
-            Title = "NoneNoneNoneNoneNoneNoneNoneNoneNone";
-            Description = "NoneNoneNoneNoneNone\nNoneNoneNoneNoneNonevNone\nNoneNoneNoneNoneNoneNone";
+            Title = "Title";
+            Description = "Description";
         }
     }
 }

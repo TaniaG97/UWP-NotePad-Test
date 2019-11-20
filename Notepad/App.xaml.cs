@@ -1,4 +1,6 @@
-﻿using Notepad.ViewModels;
+﻿using Microsoft.EntityFrameworkCore;
+using Notepad.DataModels;
+using Notepad.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +34,12 @@ namespace Notepad
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using (var db = new DataContext())
+            {
+                db.Database.Migrate();
+            }
+            ViewModel.Initialise();
         }
 
         /// <summary>

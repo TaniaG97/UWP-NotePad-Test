@@ -7,19 +7,25 @@ using System.Threading.Tasks;
 
 namespace Notepad.DataModels
 {
-    public class CategorieDataModel
+    public class CategoryDataModel
     {
-        public string Color { get; set; }
+        public string Id { get; set; }
         public string Title { get; set; }
+        public string Color { get; set; }
         public ObservableCollection<ContentItemDataModel> ContentItems { get; set; }
 
-        string[] colors = { "#FE9899", "#FFE2C5", "#41CDCC" };
-
-        public CategorieDataModel()
+        public override string ToString()
         {
+            return Title;
+        }
+
+        public CategoryDataModel()
+        {
+            string[] colors = { "#FE9899", "#FFE2C5", "#41CDCC" };
             Color = colors[new Random().Next(colors.Length)];
-            Title = "None";
+            Title = "Title";
             ContentItems = new ObservableCollection<ContentItemDataModel>();
         }
+
     }
 }

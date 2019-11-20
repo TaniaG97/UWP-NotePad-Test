@@ -54,12 +54,13 @@ namespace Notepad
 
         private void AddCategorieButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Categories.Add(new CategorieDataModel());
+            CategoryDataModel newCategory = new CategoryDataModel();
+            ViewModel.AddCategory(newCategory);
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            CategorieDataModel item = (CategorieDataModel)((Button)sender).DataContext;
+            CategoryDataModel item = (CategoryDataModel)((Button)sender).DataContext;
             ViewModel.DeleteCategory(item);
             UpdateFrame();
         }
@@ -67,7 +68,7 @@ namespace Notepad
         private void CategoriesList_ItemClick(object sender, ItemClickEventArgs e)
         {
             var listViewItem = CategoriesList.ContainerFromItem(e.ClickedItem) as ListViewItem;
-            CategorieDataModel item = (CategorieDataModel)listViewItem.Content;
+            CategoryDataModel item = (CategoryDataModel)listViewItem.Content;
             ViewModel.ChoosedCategory = item;
             UpdateFrame();
         }

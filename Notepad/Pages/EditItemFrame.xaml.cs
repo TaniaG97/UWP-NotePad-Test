@@ -40,6 +40,7 @@ namespace Notepad.Pages
         private void Title_TextChanged(object sender, TextChangedEventArgs e)
         {
             ViewModel.EditingItem.Title = ((TextBox)sender).Text;
+            
         }
 
         private void Description_TextChanged(object sender, TextChangedEventArgs e)
@@ -50,7 +51,7 @@ namespace Notepad.Pages
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
-            Hider.Background = radioButton.Background;
+            //Hider.Background = radioButton.Background;
             string color=null;
             switch (radioButton.Name)
             {
@@ -65,11 +66,17 @@ namespace Notepad.Pages
                     break;
             }
             ViewModel.EditingItem.Color = color;
+            Bindings.Update();
         }
 
         private void AddFileButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            ViewModel.EditeItem();
         }
     }
 }

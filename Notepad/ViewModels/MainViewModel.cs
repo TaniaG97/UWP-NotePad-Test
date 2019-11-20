@@ -1,4 +1,5 @@
-﻿using Notepad.DataModels;
+﻿using Microsoft.EntityFrameworkCore;
+using Notepad.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,10 +11,13 @@ namespace Notepad.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        public ObservableCollection<CategorieDataModel> Categories { get; set; }
-            = new ObservableCollection<CategorieDataModel>();
+        public ObservableCollection<CategoryDataModel> Categories { get; set; }
+            = new ObservableCollection<CategoryDataModel>();
 
-        public CategorieDataModel ChoosedCategory { get; set; }
+        public ObservableCollection<ContentItemDataModel> Items { get; set; }
+            = new ObservableCollection<ContentItemDataModel>();
+
+        public CategoryDataModel ChoosedCategory { get; set; }
         public ContentItemDataModel EditingItem { get; set; }
 
         bool isGridView;
@@ -37,28 +41,73 @@ namespace Notepad.ViewModels
             }
         }
 
-        public MainViewModel()
+        public void Initialise()
         {
-            for (int i=0; i<3;i++)
+            using (DataContext db = new DataContext())
             {
-                CategorieDataModel category = new CategorieDataModel();
-                category.ContentItems.Add(new ContentItemDataModel());
-                category.ContentItems.Add(new ContentItemDataModel());
-                category.ContentItems.Add(new ContentItemDataModel());
-                Categories.Add(category);
+                Items = new ObservableCollection<ContentItemDataModel>(db.Items.Include(x => x.Category).ToList());
+                Categories = new ObservableCollection<CategoryDataModel>(db.Categories.ToList());
             }
-
-            ChoosedCategory = Categories[0];           
+            if (Categories.Count == 0)
+            {
+                AddCategory(new CategoryDataModel());
+            }
+            ChoosedCategory = Categories[0];
         }
 
-        public void DeleteItemFromCategory(ContentItemDataModel _item)
+        public void AddItem(ContentItemDataModel _item)
         {
+            using (DataContext db = new DataContext())
+            {
+                db.Categories.Attach(ChoosedCategory);
+                db.Items.Add(_item);
+                db.SaveChanges();
+            }
+            //ChoosedCategory.ContentItems.Add(_item);
+        }
+
+        public void AddCategory(CategoryDataModel _category)
+        {
+            using (DataContext db = new DataContext())
+            {
+                db.Categories.Add(_category);
+                db.SaveChanges();
+            }
+            Categories.Add(_category);
+        }
+
+        public void EditeItem()
+        {
+            using (DataContext db = new DataContext())
+            {
+                db.Items.Update(EditingItem);
+                db.SaveChanges();
+            }
+        }
+
+        public void EditeCategory(CategoryDataModel _category)
+        {
+
+        }
+
+        public void DeleteItem(ContentItemDataModel _item)
+        {
+            using (DataContext db = new DataContext())
+            {
+                db.Items.Remove(_item);
+                db.SaveChanges();
+            }
             ChoosedCategory.ContentItems.Remove(_item);
         }
 
-        public void DeleteCategory(CategorieDataModel _category)
+        public void DeleteCategory(CategoryDataModel _category)
         {
-            if(_category== ChoosedCategory)
+            using (DataContext db = new DataContext())
+            {
+                db.Categories.Remove(_category);
+                db.SaveChanges();
+            }
+            if (_category== ChoosedCategory)
             {
                 Categories.Remove(_category);
                 ChoosedCategory = Categories[0];

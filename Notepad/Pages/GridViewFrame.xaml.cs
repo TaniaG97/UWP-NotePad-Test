@@ -39,12 +39,14 @@ namespace Notepad.Pages
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             ContentItemDataModel item = (ContentItemDataModel)((Button)sender).DataContext;
-            ViewModel.DeleteItemFromCategory(item);
+            ViewModel.DeleteItem(item);
         }
 
         private void AddItemButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.ChoosedCategory.ContentItems.Add(new ContentItemDataModel());
+            ContentItemDataModel newItem = new ContentItemDataModel();
+            newItem.Category = ViewModel.ChoosedCategory;
+            ViewModel.AddItem(newItem);
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
