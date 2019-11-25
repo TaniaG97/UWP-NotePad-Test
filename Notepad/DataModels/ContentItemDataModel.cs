@@ -12,6 +12,7 @@ namespace Notepad.DataModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string Color { get; set; }
+        public List<AttachedFileModel> AttachedFiles { get; set; }
         
         public int CategoryId { get; set; }
         public CategoryDataModel Category { get; set; }
@@ -22,6 +23,7 @@ namespace Notepad.DataModels
             Color = colors[new Random().Next(colors.Length)];
             Title = "Title";
             Description = "Description";
+            AttachedFiles = new List<AttachedFileModel>();
         }
     }
 }

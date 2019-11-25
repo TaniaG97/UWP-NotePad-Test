@@ -11,9 +11,11 @@ namespace Notepad.DataModels
     {
         public DbSet<CategoryDataModel> Categories { get; set; }
         public DbSet<ContentItemDataModel> Items { get; set; }
+        public DbSet<AttachedFileModel> AttachedFiles { get; set; }
 
         public DataContext()
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -41,8 +41,9 @@
                      Foreground="White"
                      TextChanged="Title_TextChanged"/>
         </Grid>
-        <StackPanel Grid.Row="1" Padding="25">
-            <TextBox x:Name="Description" 
+        <ScrollViewer Grid.Row="1" Padding="25">
+            <StackPanel x:Name="AttachedFilesPanel">
+                <TextBox x:Name="Description" 
                      Text="{x:Bind ViewModel.EditingItem.Description}"
                      HorizontalAlignment="Left" 
                      VerticalAlignment="Center"
@@ -51,7 +52,8 @@
                      FontSize="30"
                      Foreground="White"
                      TextChanged="Description_TextChanged"/>
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>       
         <RelativePanel Grid.Row="2" >
             <StackPanel Orientation="Horizontal"  RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                 <RadioButton x:Name="Red"
@@ -92,8 +94,7 @@
                     Foreground="White"  
                     Background="#011F33"
                     Click="AddFileButton_Click"/>
-        </RelativePanel>
-        
+        </RelativePanel>        
 
     </Grid>
 

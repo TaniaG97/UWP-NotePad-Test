@@ -16,6 +16,8 @@ namespace Notepad.ViewModels
 
         public ObservableCollection<ContentItemDataModel> Items { get; set; }
             = new ObservableCollection<ContentItemDataModel>();
+        public ObservableCollection<AttachedFileModel> AttachedFiles { get; set; }
+            = new ObservableCollection<AttachedFileModel>();
 
         public CategoryDataModel ChoosedCategory { get; set; }
         public ContentItemDataModel EditingItem { get; set; }
@@ -47,6 +49,7 @@ namespace Notepad.ViewModels
             {
                 Items = new ObservableCollection<ContentItemDataModel>(db.Items.Include(x => x.Category).ToList());
                 Categories = new ObservableCollection<CategoryDataModel>(db.Categories.ToList());
+                AttachedFiles = new ObservableCollection<AttachedFileModel>(db.AttachedFiles.Include(x => x.Item).ToList());
             }
             if (Categories.Count == 0)
             {

@@ -71,7 +71,7 @@
                             Click="Button3_Click"/>
                 </StackPanel>          
         </Grid>
-        <SplitView x:Name="SpliteViewMenu" Grid.Row="1" OpenPaneLength="300" DisplayMode="Inline" IsPaneOpen="True">
+        <SplitView x:Name="SpliteViewMenu" Grid.Row="1" OpenPaneLength="400" DisplayMode="Inline" IsPaneOpen="True">
             <SplitView.Pane>
                 <Grid Background="#2E3441">
                     <Grid.RowDefinitions>

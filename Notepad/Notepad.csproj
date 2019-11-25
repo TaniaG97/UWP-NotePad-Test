@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\AttachedFileModel.cs" />
     <Compile Include="DataModels\CategoryDataModel.cs" />
     <Compile Include="DataModels\ContentItemDataModel.cs" />
     <Compile Include="DataModels\DataContext.cs" />
